@@ -1,0 +1,71 @@
+body, div, main, img, p, i {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 100%;
+    background-color: hsla(240, 100%, 95%, 0.7);
+}
+
+main {
+    width: 60rem;
+    margin: 0 auto;
+    display: flex;
+}
+
+#right, #left {
+    width: 30em;
+}
+.progress {
+    cursor: pointer;
+}
+#controls {
+    margin-top: 5em;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+
+#avator {
+    background-image: url("../assets/images/singer.jpg");
+    background-size: contain;
+    width: 10em;
+    height: 10em;
+    border-radius: .5em;
+}
+
+#controls-right {
+    width: 19em;
+    height: 10em;
+}
+
+.buttons-group {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#volume-bar {
+    padding-left: 4em;
+}
+#volume-bar > i {
+    color: #aaaaaa;
+}
+#volume-bar-outer {
+    width: 50%;
+    background-color: hsl(58, 77%, 83%);
+}
+#volume-bar-inner {
+    background-color: hsl(197, 74%, 62%);
+}
+#progress-bar {
+    color: #aaaaaa;
+    padding-left: 4em;
+}
+#progress-bar-outer {
+    width: 100%;
+    background-color: hsla(59, 77%, 83%, 1);
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/semantic.min.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/semantic.min.js"></script>
+    <title>甜脆音乐播放器</title>
+</head>
+<body>
+    <main>
+        <div id="left">
+            <div id="controls">
+                <div id="avator"></div>
+                <div id="controls-right">
+                    <div class="buttons-group">
+                        <button class="basic circular icon ui button"><i class="teal large backward icon"></i></button>
+                        <button class="big basic circular icon ui button"><i class="teal large play icon"></i></button>
+                        <button class="basic circular icon ui button"><i class="teal large forward icon"></i></button>
+                    </div>
+                    <div id="volume-bar">
+                        <i class="volume up icon"></i>
+                        <div class="tiny ui progress" id="volume-bar-outer">
+                            <div class="bar" id="volume-bar-inner"></div>
+                        </div>
+                    </div>
+                    <div id="progress-bar">
+                        <div class="song-time">3:24</div>
+                        <div class="tiny ui red progress" id="progress-bar-outer">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="right">
+        </div>
+    </main>
+    <script>
+        "use strict";
+        $('#progress-bar-outer').progress({
+            value: 50,
+            total: 100
+        });
+        $('button').on('click', function (event) {
+           $('#progress-bar-outer').progress('increment', 10);
+        });
+    </script>
+</body>
+</html>
