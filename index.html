@@ -22,31 +22,42 @@
                     </div>
                     <div id="volume-bar">
                         <i class="volume up icon"></i>
-                        <div class="tiny ui progress" id="volume-bar-outer">
-                            <div class="bar" id="volume-bar-inner"></div>
+                        <div id="volume-bar-outer">
+                            <div id="volume-bar-inner"></div>
                         </div>
                     </div>
                     <div id="progress-bar">
                         <div class="song-time">3:24</div>
-                        <div class="tiny ui red progress" id="progress-bar-outer">
-                            <div class="bar"></div>
+                        <div id="progress-bar-outer">
+                            <div id="progress-bar-inner"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div id="right">
+            <div id="wrapper">
+                <div id="search-bar">
+                    <input type="text" placeholder="请搜索...">
+                    <i class="search icon"></i>
+                </div>
+                <div id="playlist">
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
+                </div>
+            </div>
         </div>
     </main>
     <script>
         "use strict";
-        $('#progress-bar-outer').progress({
-            value: 50,
-            total: 100
-        });
-        $('button').on('click', function (event) {
-           $('#progress-bar-outer').progress('increment', 10);
-        });
     </script>
 </body>
 </html>
