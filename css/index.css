@@ -29,7 +29,7 @@ main {
 }
 
 
-#avator {
+#avatar {
     background-image: url("../assets/images/singer.jpg");
     background-size: contain;
     width: 10em;
@@ -88,7 +88,7 @@ main {
 }
 #search-bar {
     position: relative;
-    margin-left: 4rem;
+    margin-left: 3rem;
     width: 13.5rem;
     margin-bottom: 1rem;
 }
@@ -105,23 +105,25 @@ main {
     top: 30%;
 }
 #playlist {
-    font-size: 14px;
     height: 24em;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-left: 4rem;
+    margin-left: 3rem;
 }
 .songs {
     height: 2.5em;
-    width: 100%;
     margin-top: .25em;
     border: 1px solid #a94442;
     line-height: 2em;
 }
 .songs > div {
     display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .song-name {
+    font-size: 14px;
     width: 15rem;
     text-align: center;
 }
@@ -138,8 +140,8 @@ main {
     color: hsl(0, 0%, 44%);
 }
 .singer-name {
-    text-align: center;
     width: 5rem;
+    text-align: center;
     color: hsl(210, 58%, 49%);
     font-size: .8em;
 }
