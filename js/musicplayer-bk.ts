@@ -38,8 +38,8 @@
     function progressBarHandler(event) {
         var diff = event.clientX - configMap.progressBarOuterOffsetLeft;
         var percentage = diff / configMap.progressBarOuterWidth;
-        var curTime = configMap.audio.duration * percentage;
-        configMap.audio.currentTime = curTime;
+        var duration = configMap.audio.duration * percentage;
+        configMap.audio.currentTime = duration * percentage;
         jqueryMap.$progressBarInner.css('width', function (index, oldValue) {
             return configMap.progressBarOuterWidth * percentage;
         })
@@ -165,10 +165,6 @@
             return false;
         });
         jqueryMap.$nextBtn.on('click', function (event) {
-            nextSong();
-            return false;
-        });
-        jqueryMap.$audio.on('ended', function (event) {
             nextSong();
             return false;
         });
