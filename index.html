@@ -20,18 +20,21 @@
                 </div>
                 <div id="controls-right">
                     <div class="buttons-group">
-                        <button class="basic circular icon ui button"><i class="teal large backward icon"></i></button>
-                        <button class="big basic circular icon ui button"><i class="teal large play icon"></i></button>
-                        <button class="basic circular icon ui button"><i class="teal large forward icon"></i></button>
+                        <button id="prev-btn" class="basic circular icon ui button"><i class="teal large backward icon"></i></button>
+                        <button id="play-btn" class="big basic circular icon ui button">
+                            <i class="teal large play icon"></i>
+                            <i class="teal large pause icon"></i>
+                        </button>
+                        <button id="next-btn" class="basic circular icon ui button"><i class="teal large forward icon"></i></button>
                     </div>
                     <div id="volume-bar">
-                        <i class="volume up icon"></i>
+                        <i class="volume up icon" id="volume-btn"></i>
                         <div id="volume-bar-outer">
                             <div id="volume-bar-inner"></div>
                         </div>
                     </div>
                     <div id="progress-bar">
-                        <div class="song-time">3:24</div>
+                        <div id="song-time">0:00</div>
                         <div id="progress-bar-outer">
                             <div id="progress-bar-inner"></div>
                         </div>
@@ -59,9 +62,10 @@
                 </div>
             </div>
         </div>
+        <div id="audio">
+            <audio src=""></audio>
+        </div>
     </main>
-    <script>
-        "use strict";
-    </script>
+    <script src="js/musicplayer.js"></script>
 </body>
 </html>
