@@ -30,7 +30,7 @@ module MusicPlayer {
         curSong: 0,
         curState: configMap.playingState.init,
         playlist: [],
-        timeId: null
+        timeId: null,
     };
     var audio = <HTMLAudioElement>jqueryMap.$audio.get(0);
 
@@ -57,7 +57,7 @@ module MusicPlayer {
         return false;
     }
 
-    function volumeBarHandler(event):boolean {
+    function volumeBarClickHandler(event):boolean {
         var diff = event.clientX - configMap.volumeBarOuterOffsetLeft;
         var percentage = diff / configMap.volumeBarOuterWidth;
         audio.volume = percentage;
@@ -74,7 +74,7 @@ module MusicPlayer {
         audio.currentTime = curTime;
         jqueryMap.$progressBarInner.css('width', function (index, oldValue) {
             return configMap.progressBarOuterWidth * percentage;
-        })
+        });
         return false;
     }
 
@@ -179,7 +179,7 @@ module MusicPlayer {
             nextSong();
             return false;
         });
-        jqueryMap.$volumeBarOuter.on('click', volumeBarHandler);
+        jqueryMap.$volumeBarOuter.on('click', volumeBarClickHandler);
         jqueryMap.$progressBarOuter.on('click', progressBarHandler);
         jqueryMap.$audio.on('timeupdate', timeupdateHandler);
         // --- End ---

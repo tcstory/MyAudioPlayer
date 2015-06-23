@@ -1,3 +1,10 @@
 /// <reference path="musicplayer.ts" />
-MusicPlayer.initModule();
+var Shell;
+(function (Shell) {
+    "use strict";
+    function initModule() {
+        MusicPlayer.initModule();
+    }
+    Shell.initModule = initModule;
+})(Shell || (Shell = {}));
 //# sourceMappingURL=shell.js.map

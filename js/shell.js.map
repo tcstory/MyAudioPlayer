@@ -1,1 +1,1 @@
-{"version":3,"file":"shell.js","sourceRoot":"","sources":["shell.ts"],"names":[],"mappings":"AAAA,uCAAuC;AACvC,WAAW,CAAC,UAAU,EAAE,CAAC"}
+{"version":3,"file":"shell.js","sourceRoot":"","sources":["shell.ts"],"names":["Shell","Shell.initModule"],"mappings":"AAAA,uCAAuC;AACvC,IAAO,KAAK,CAKX;AALD,WAAO,KAAK,EAAC,CAAC;IACVA,YAAYA,CAACA;IACbA;QACIC,WAAWA,CAACA,UAAUA,EAAEA,CAACA;IAC7BA,CAACA;IAFeD,gBAAUA,aAEzBA,CAAAA;AACLA,CAACA,EALM,KAAK,KAAL,KAAK,QAKX"}

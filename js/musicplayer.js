@@ -30,7 +30,7 @@ var MusicPlayer;
         curSong: 0,
         curState: configMap.playingState.init,
         playlist: [],
-        timeId: null
+        timeId: null,
     };
     var audio = jqueryMap.$audio.get(0);
     function timeupdateHandler() {
@@ -55,7 +55,7 @@ var MusicPlayer;
         }
         return false;
     }
-    function volumeBarHandler(event) {
+    function volumeBarClickHandler(event) {
         var diff = event.clientX - configMap.volumeBarOuterOffsetLeft;
         var percentage = diff / configMap.volumeBarOuterWidth;
         audio.volume = percentage;
@@ -168,7 +168,7 @@ var MusicPlayer;
             nextSong();
             return false;
         });
-        jqueryMap.$volumeBarOuter.on('click', volumeBarHandler);
+        jqueryMap.$volumeBarOuter.on('click', volumeBarClickHandler);
         jqueryMap.$progressBarOuter.on('click', progressBarHandler);
         jqueryMap.$audio.on('timeupdate', timeupdateHandler);
         // --- End ---

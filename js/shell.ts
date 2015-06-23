@@ -1,3 +1,8 @@
 /// <reference path="musicplayer.ts" />
-MusicPlayer.initModule();
+module Shell {
+    "use strict";
+    export function initModule() {
+        MusicPlayer.initModule();
+    }
+}
 
