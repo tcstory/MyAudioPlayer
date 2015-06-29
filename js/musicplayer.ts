@@ -6,8 +6,6 @@ module MusicPlayer {
         $playBtn: $('#play-btn'),
         $prevBtn: $('#prev-btn'),
         $nextBtn: $('#next-btn'),
-        $pauseIcon: $('#play-btn').find('i.pause.icon'),
-        $playIcon: $('#play-btn').find('i.play.icon'),
         $volumeBarOuter: $('#volume-bar-outer'),
         $volumeBarInner: $('#volume-bar-inner'),
         $progressBarOuter: $('#progress-bar-outer'),
@@ -86,18 +84,21 @@ module MusicPlayer {
                     src: songPath
                 });
                 stateMap.curState = configMap.playingState.playing;
-                jqueryMap.$playIcon.css('display', 'none');
-                jqueryMap.$pauseIcon.css('display', 'block');
+                jqueryMap.$playBtn.css({
+                    'background-position': '13px -548px'
+                });
                 audio.play();
                 return true;
             case configMap.playingState.playing:
-                jqueryMap.$playIcon.css('display', 'block');
-                jqueryMap.$pauseIcon.css('display', 'none');
+                jqueryMap.$playBtn.css({
+                    'background-position': '13px -448px'
+                });
                 pauseSong();
                 return true;
             case configMap.playingState.pause:
-                jqueryMap.$playIcon.css('display', 'none');
-                jqueryMap.$pauseIcon.css('display', 'block');
+                jqueryMap.$playBtn.css({
+                    'background-position': '13px -548px'
+                });
                 stateMap.curState = configMap.playingState.playing;
                 audio.play();
                 return true;
@@ -152,8 +153,6 @@ module MusicPlayer {
     export function initModule() {
 
         // --- Initializing User Interface
-        jqueryMap.$playIcon.css('display', 'block');
-        jqueryMap.$pauseIcon.css('display', 'none');
         getPlaylist();
         jqueryMap.$volumeBarInner.css('width', function (index, oldValue) {
             var curVolume = audio.volume;

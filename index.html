@@ -3,29 +3,34 @@
 <head lang="zh-CN">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="css/semantic.min.css"/>
     <link rel="stylesheet" href="css/index.css"/>
     <script src="js/lib/jquery.min.js"></script>
-    <script src="js/lib/semantic.min.js"></script>
     <title>甜脆音乐播放器</title>
+    <script>
+        $(function () {
+            var bg_height = document.documentElement.clientHeight;
+            var bg_width = document.documentElement.clientWidth;
+            $('#bg-image > img').css({
+                width: bg_width,
+                height: bg_height
+            });
+        });
+    </script>
 </head>
 <body>
+<div id="bg-image">
+    <img src="assets/images/bg-image.jpg" alt=""/>
+</div>
     <main>
         <div id="left">
             <div id="controls">
                 <div id="avatar">
-                    <div class="ui inverted dimmer">
-                        <div class="ui text loader">加载中...</div>
-                    </div>
                 </div>
                 <div id="controls-right">
                     <div class="buttons-group">
-                        <button id="prev-btn" class="basic circular icon ui button"><i class="teal large backward icon"></i></button>
-                        <button id="play-btn" class="big basic circular icon ui button">
-                            <i class="teal large play icon"></i>
-                            <i class="teal large pause icon"></i>
-                        </button>
-                        <button id="next-btn" class="basic circular icon ui button"><i class="teal large forward icon"></i></button>
+                        <button id="prev-btn" class="play-button"></button>
+                        <button id="play-btn" class="play-button"></button>
+                        <button id="next-btn" class="play-button"></button>
                     </div>
                     <div id="volume-bar">
                         <i class="volume up icon" id="volume-btn"></i>
@@ -46,7 +51,6 @@
             <div id="wrapper">
                 <div id="search-bar">
                     <input type="text" placeholder="请搜索...">
-                    <i class="search icon"></i>
                 </div>
                 <div id="playlist">
                     <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
