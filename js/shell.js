@@ -7,16 +7,24 @@ var Shell;
     var jqueryMap = {
         $searchBar: $('#search-bar'),
         $suggestionBox: $('#suggestion-box'),
-        $inputBar: $('#search-bar').find('input')
+        $inputBar: $('#search-bar').find('input'),
+        $playlist: $('#playlist')
     };
     var stateMap = {
         $currentItem: null,
         $candidates: null,
         queryString: '',
-        jobID: 0 // 用来处理chrome下keyup问题而设置的setTimeout的id
+        jobID: 0,
+        pageID: 0
     };
     var configMap = {
-        timeout: 500
+        timeout: 500,
+        template: '<div class="songs">' +
+            '<div class="song-name"><span>num. </span>songName</div>' +
+            '<div class="song-long">popularity</div>' +
+            '<div class="song-size">人气</div>' +
+            '<div class="singer-name">singerName</div>' +
+            '</div>'
     };
     var sendSuggestionRequest = function () {
         // 假如是非firefox浏览器
@@ -57,10 +65,16 @@ var Shell;
         }
     }();
     function responseKeyboard(event) {
-        //console.log('keyup: ' + event.keyCode);
+        var name = $.trim(jqueryMap.$inputBar.val());
         // 按下回车键
         if (event.which === 13) {
             refreshSuggestionWindow();
+            stateMap.pageID = Modal.getSongs(name, 1, {
+                success: showSongs,
+                error: function (textStatus) {
+                    console.log(textStatus);
+                }
+            });
         }
         else if (event.which === 40) {
             if (!stateMap.$candidates) {
@@ -98,7 +112,7 @@ var Shell;
                 }
             }
         }
-        else if ($.trim(jqueryMap.$inputBar.val()) != stateMap.queryString) {
+        else if (name != stateMap.queryString) {
             sendSuggestionRequest();
         }
         return false;
@@ -121,6 +135,34 @@ var Shell;
         // 缓存所有候选项
         stateMap.$candidates = $('#suggestion-box').children();
         return true;
+    }
+    function showSongs(result) {
+        var data = result.data;
+        var $fragment = $(document.createDocumentFragment());
+        data.forEach(function (item, index, array) {
+            var songName = item['song_name'];
+            var popularity = item['pick_count'] || "未知";
+            var singerName = item['singer_name'];
+            var str = configMap.template.replace(/songName|popularity|singerName/g, function (match, pos, originalText) {
+                switch (match) {
+                    case 'songName':
+                        return songName;
+                    case 'popularity':
+                        return popularity;
+                    case 'singerName':
+                        return singerName;
+                }
+            });
+            console.log(str);
+            var part = $(str);
+            $fragment.append(part);
+        });
+        if (stateMap.pageID === 1) {
+            jqueryMap.$playlist.html($fragment);
+        }
+        else {
+            jqueryMap.$playlist.append($fragment);
+        }
     }
     function refreshSuggestionWindow() {
         // 刷新状态

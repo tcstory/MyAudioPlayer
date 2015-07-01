@@ -11,6 +11,17 @@ var Modal;
         return true;
     }
     Modal.getSuggestions = getSuggestions;
+    function getSongs(name, page, callbacks) {
+        var data = {
+            q: name,
+            size: 50,
+            page: page
+        };
+        var url = 'http://so.ard.iyyin.com/s/song_with_out?';
+        Data.send(url, 3000, data, callbacks);
+        return page;
+    }
+    Modal.getSongs = getSongs;
     function initModule() {
         return true;
     }

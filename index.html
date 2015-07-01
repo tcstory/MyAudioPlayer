@@ -56,16 +56,6 @@
                     </ul>
                 </div>
                 <div id="playlist">
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
-                    <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
                 </div>
             </div>
         </div>
@@ -82,6 +72,31 @@
         Modal.initModule();
         Data.initModule();
         Shell.initModule();
+        var result;
+        function handle(data) {
+            result = data;
+            return data;
+        }
+        function test(q,page,size, callback) {
+            $.ajax({
+                url:'http://so.ard.iyyin.com/s/song_with_out?',
+                method: 'GET',
+                dataType: 'jsonp',
+                timeout: 5000,
+                data: {
+                    q: q,
+                    page: page,
+                    size: size
+                },
+                success: function(data, textStatus, jqXHR) {
+                    console.log('Done');
+                    callback(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('error');
+                }
+            });
+        }
     </script>
 </body>
 </html>

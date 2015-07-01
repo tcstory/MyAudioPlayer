@@ -203,7 +203,7 @@ main {
 .song-name {
     font-size: 14px;
     width: 15rem;
-    text-align: center;
+    /*text-align: center;*/
 }
 .song-long {
     text-align: center;
