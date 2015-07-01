@@ -12,8 +12,50 @@ var Shell;
     var stateMap = {
         $currentItem: null,
         $candidates: null,
-        queryString: '' // 记录下用户上一次搜索的字符串
+        queryString: '',
+        jobID: 0 // 用来处理chrome下keyup问题而设置的setTimeout的id
     };
+    var configMap = {
+        timeout: 500
+    };
+    var sendSuggestionRequest = function () {
+        // 假如是非firefox浏览器
+        if (navigator.userAgent.search(/khtml/i) != -1) {
+            return function () {
+                // 该函数添加了一个计时器,避免在中文输入法打开的情况下,输入搜索字符串的时候,
+                // 由于keyup事件频繁促发而导致的过多jsonp请求
+                if ($.trim(jqueryMap.$inputBar.val()) === '') {
+                    refreshSuggestionWindow();
+                    return false;
+                }
+                clearTimeout(stateMap.jobID);
+                stateMap.jobID = setTimeout(function () {
+                    stateMap.queryString = $.trim(jqueryMap.$inputBar.val());
+                    Modal.getSuggestions($.trim(jqueryMap.$inputBar.val()), {
+                        success: showSuggestion,
+                        error: function (textStatus) {
+                            console.log(textStatus);
+                        }
+                    });
+                }, configMap.timeout);
+            };
+        }
+        else if (navigator.userAgent.search(/firefox/i) != -1) {
+            return function () {
+                if ($.trim(jqueryMap.$inputBar.val()) === '') {
+                    refreshSuggestionWindow();
+                    return false;
+                }
+                stateMap.queryString = $.trim(jqueryMap.$inputBar.val());
+                Modal.getSuggestions($.trim(jqueryMap.$inputBar.val()), {
+                    success: showSuggestion,
+                    error: function (textStatus) {
+                        console.log(textStatus);
+                    }
+                });
+            };
+        }
+    }();
     function responseKeyboard(event) {
         //console.log('keyup: ' + event.keyCode);
         // 按下回车键
@@ -57,19 +99,7 @@ var Shell;
             }
         }
         else if ($.trim(jqueryMap.$inputBar.val()) != stateMap.queryString) {
-            if ($.trim(jqueryMap.$inputBar.val()) === '') {
-                refreshSuggestionWindow();
-                return false;
-            }
-            console.log($.trim(jqueryMap.$inputBar.val()));
-            console.log(stateMap.queryString);
-            stateMap.queryString = $.trim(jqueryMap.$inputBar.val());
-            Modal.getSuggestions($.trim(jqueryMap.$inputBar.val()), {
-                success: showSuggestion,
-                error: function (textStatus) {
-                    console.log(textStatus);
-                }
-            });
+            sendSuggestionRequest();
         }
         return false;
     }
@@ -105,12 +135,6 @@ var Shell;
             jqueryMap.$suggestionBox.html('');
             return false;
         });
-        //jqueryMap.$searchBar.on('keydown', function (e) {
-        //    console.log('keydown');
-        //});
-        //jqueryMap.$searchBar.on('keypress', function (e) {
-        //    console.log('keypress');
-        //});
     }
     Shell.initModule = initModule;
 })(Shell || (Shell = {}));
