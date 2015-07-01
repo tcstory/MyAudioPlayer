@@ -50,7 +50,9 @@
         <div id="right">
             <div id="wrapper">
                 <div id="search-bar">
-                    <input type="text" placeholder="请搜索...">
+                    <input type="text" placeholder="请搜索..." maxlength="20">
+                    <ul id="suggestion-box">
+                    </ul>
                 </div>
                 <div id="playlist">
                     <div class="songs"><div class="song-name"><span>1. </span>不可说 (电视剧《花千骨》主题曲)</div><div class="song-long">8643</div><div class="song-size">人气</div><div class="singer-name">赵丽颖 &amp; 霍建华</div></div>
@@ -71,8 +73,13 @@
         </div>
     </main>
     <script src="js/musicplayer.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/shell.js"></script>
     <script>
+        MusicPlayer.initModule();
+        Modal.initModule();
+        Data.initModule();
         Shell.initModule();
     </script>
 </body>

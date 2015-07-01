@@ -1,4 +1,4 @@
-body, div, main, img, p, i,input {
+body, div, main, img, p, i,input, ul, li {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,10 +14,9 @@ button:focus {
 }
 
 /*对firefox有效*/
-  button::-moz-focus-inner {
+button::-moz-focus-inner {
     border: 0;
 }
-
 
 input {
     color: #ffffff;
@@ -36,6 +35,9 @@ input::-moz-placeholder { /* Mozilla Firefox 19+ */
 }
 input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #fff;
+}
+li {
+    list-style: none;
 }
 
 
@@ -157,13 +159,29 @@ main {
     background-color: hsla(0, 0%, 0%, 0);
     border: 1px solid hsla(147, 66%, 47%, 0.8);
 }
-.search.icon {
-    display: block;
-    color: hsla(147, 66%, 47%, 0.8);
+#suggestion-box {
     position: absolute;
-    right: 0;
-    top: 30%;
+    width: 10.625rem;
+    z-index: 1;
+    background-color: white;
+    top: 100%;
+    overflow: hidden;
+    font-size: .8rem;
 }
+#suggestion-box > li {
+    color: black;
+    cursor: pointer;
+    background-clip: padding-box;
+    padding: .25rem;
+    transition: background-color .3s;
+}
+#suggestion-box > li:hover {
+    background-color: aquamarine;
+}
+.choosed-item {
+    background-color: aquamarine;
+}
+
 #playlist {
     height: 24em;
     overflow-y: auto;
