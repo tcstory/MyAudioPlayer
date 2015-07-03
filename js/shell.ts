@@ -9,7 +9,8 @@ module Shell {
         $inputBar: $('#search-bar').find('input'),
         $playlist: $('#playlist'),
         $prevPage: $('#prev-page'),
-        $nextPage: $('#next-page')
+        $nextPage: $('#next-page'),
+        $avatar: $('#avatar')
     };
     var stateMap = {
         $currentItem: null,
@@ -17,7 +18,8 @@ module Shell {
         queryString: '',  // 记录下用户上一次搜索的字符串
         jobID: 0,  // 用来处理chrome下keyup问题而设置的setTimeout的id
         pageNum: 1,
-        isDisplay: false
+        isDisplay: false,
+        curSinger: ''
     };
     var configMap = {
         timeout: 500,
@@ -184,6 +186,8 @@ module Shell {
             });
             var $part = $(str);
             $part.attr('data-order', orderNum);
+            // 属性名不区分大小写的,会被自动转换成小写
+            $part.attr('data-singer-name', singerName);
             $fragment.append($part);
 
         });
@@ -247,6 +251,34 @@ module Shell {
         return false;
     }
 
+    function changeSingerPic(result):boolean {
+        if (result['data']['singerPic']) {
+            var url = 'url(' + result['data']['singerPic'] + ')';
+            console.log(url);
+            jqueryMap.$avatar.css({
+                'background-image': url
+            });
+        } else {
+            url = "../assets/images/Firefox.png";
+            jqueryMap.$avatar.css({
+                'background-image': url
+            });
+        }
+        return true;
+    }
+
+    function getSingerPic(name:string):boolean {
+        if (stateMap.curSinger != name) {
+            Modal.getSingerPic(name, {
+                success: changeSingerPic,
+                error: function (textStatus) {
+                    console.log(textStatus);
+                }
+            });
+            stateMap.curSinger = name;
+        }
+        return true;
+    }
 
     export function initModule() {
         jqueryMap.$searchBar.on('keyup', responseKeyboard);
@@ -261,6 +293,7 @@ module Shell {
                 isCross: false
             });
             MusicPlayer.playSong();
+            getSingerPic($(event.target.parentNode).attr('data-singer-name'));
         });
         jqueryMap.$prevPage.on('click', handlePageEvent);
         jqueryMap.$nextPage.on('click', handlePageEvent);

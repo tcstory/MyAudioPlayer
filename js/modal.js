@@ -26,11 +26,20 @@ var Modal;
         return true;
     }
     Modal.getSongs = getSongs;
+    function getSingerPic(name, callbacks) {
+        var data = {
+            artist: name
+        };
+        var url = 'http://lp.music.ttpod.com/pic/down?';
+        Data.send(url, 3000, data, callbacks);
+    }
+    Modal.getSingerPic = getSingerPic;
     function storePlaylist(item) {
         stateMap.playlist.push(item);
     }
     Modal.storePlaylist = storePlaylist;
     function getPlaylist() {
+        console.log(stateMap.playlist);
         return stateMap.playlist;
     }
     Modal.getPlaylist = getPlaylist;

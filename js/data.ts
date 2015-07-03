@@ -1,9 +1,10 @@
 /// <reference path="../typings/jquery/jquery.d.ts" />
 module Data {
-    interface Query {
-        q:string;
+    interface MyData {
+        q?:string;
         page?: number;
-        size: number;
+        size?: number;
+        artist?: string;
 
     }
     interface Callback {
@@ -11,7 +12,7 @@ module Data {
         error:(any)=>any;
     }
 
-    export function send(url:string, timeout:number, data:Query, callbacks:Callback) {
+    export function send(url:string, timeout:number, data:MyData, callbacks:Callback) {
         $.ajax({
             url:url,
             method: 'GET',

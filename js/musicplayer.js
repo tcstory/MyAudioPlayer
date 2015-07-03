@@ -84,6 +84,7 @@ var MusicPlayer;
     function playSong() {
         switch (stateMap.curState) {
             case configMap.playingState.init:
+                // 有些歌曲有版权纠纷,所以返回的播放列表为空 例如"蔡依林"第一页结果的歌曲"倒带"
                 var songPath = stateMap.playlist[stateMap.curSong]['url_list'][stateMap.quality]['url'];
                 jqueryMap.$audio.attr({
                     src: songPath

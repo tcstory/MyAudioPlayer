@@ -41,10 +41,19 @@ module Modal {
         return true;
     }
 
+    export function getSingerPic(name:string, callbacks:Callback):boolean {
+        var data = {
+            artist: name
+        };
+        var url = 'http://lp.music.ttpod.com/pic/down?';
+        Data.send(url, 3000, data, callbacks);
+    }
+
     export function storePlaylist(item:SongItem) {
         stateMap.playlist.push(item);
     }
     export function getPlaylist() {
+        console.log(stateMap.playlist);
         return stateMap.playlist;
     }
     export function emptyPlaylist(flag:boolean) {
