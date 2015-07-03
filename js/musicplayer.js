@@ -36,7 +36,8 @@ var MusicPlayer;
         curState: configMap.playingState.init,
         playlist: _playlist,
         timeId: null,
-        quality: configMap.musicQuality.standard
+        quality: configMap.musicQuality.standard,
+        isCross: false
     };
     var audio = jqueryMap.$audio.get(0);
     function timeupdateHandler() {
@@ -152,6 +153,7 @@ var MusicPlayer;
     function setState(obj) {
         stateMap.curSong = obj.curSong;
         stateMap.curState = obj.playingState;
+        stateMap.isCross = obj.isCross;
     }
     MusicPlayer.setState = setState;
     function initModule() {
@@ -176,7 +178,12 @@ var MusicPlayer;
             return false;
         });
         jqueryMap.$audio.on('ended', function (event) {
-            nextSong();
+            if (stateMap.isCross) {
+                playSong();
+            }
+            else {
+                nextSong();
+            }
             return false;
         });
         jqueryMap.$volumeBarOuter.on('click', volumeBarClickHandler);

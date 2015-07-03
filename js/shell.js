@@ -8,14 +8,17 @@ var Shell;
         $searchBar: $('#search-bar'),
         $suggestionBox: $('#suggestion-box'),
         $inputBar: $('#search-bar').find('input'),
-        $playlist: $('#playlist')
+        $playlist: $('#playlist'),
+        $prevPage: $('#prev-page'),
+        $nextPage: $('#next-page')
     };
     var stateMap = {
         $currentItem: null,
         $candidates: null,
         queryString: '',
         jobID: 0,
-        pageID: 0
+        pageNum: 1,
+        isDisplay: false
     };
     var configMap = {
         timeout: 500,
@@ -74,12 +77,15 @@ var Shell;
         // 按下回车键
         if (event.which === 13) {
             refreshSuggestionWindow();
-            stateMap.pageID = Modal.getSongs(name, 1, {
+            stateMap.pageNum = 1;
+            Modal.getSongs(name, 1, {
                 success: showSongs,
                 error: function (textStatus) {
                     console.log(textStatus);
                 }
             });
+            // 清除chrome下,按下回车键后依旧弹出建议窗口的问题
+            clearTimeout(stateMap.jobID);
         }
         else if (event.which === 40) {
             if (!stateMap.$candidates) {
@@ -143,7 +149,6 @@ var Shell;
     function showSongs(result) {
         var data = result.data;
         var $fragment = $(document.createDocumentFragment());
-        Modal.emptyPlaylist(true);
         data.forEach(function (item, index, array) {
             var songName = item['song_name'];
             var songID = item['song_id'];
@@ -177,14 +182,16 @@ var Shell;
             $part.attr('data-order', orderNum);
             $fragment.append($part);
         });
+        stateMap.isDisplay = true;
         MusicPlayer.updatePlaylist();
-        if (stateMap.pageID === 1) {
-            jqueryMap.$playlist.html('');
-            jqueryMap.$playlist.append($fragment);
-        }
-        else {
-            jqueryMap.$playlist.append($fragment);
-        }
+        Modal.emptyPlaylist(true);
+        jqueryMap.$playlist.html('');
+        jqueryMap.$playlist.append($fragment);
+        MusicPlayer.setState({
+            curSong: 0,
+            playingState: configMap.playingState.init,
+            isCross: true
+        });
     }
     function refreshSuggestionWindow() {
         // 刷新状态
@@ -192,6 +199,36 @@ var Shell;
         stateMap.$currentItem = null;
         stateMap.$candidates = null;
         return true;
+    }
+    function handlePageEvent(event) {
+        if (!stateMap.isDisplay) {
+            return false;
+        }
+        var name = $.trim(jqueryMap.$inputBar.val());
+        if (event.target['id'] === "prev-page") {
+            if (stateMap.pageNum === 1) {
+                alert('已经是第一页');
+                return false;
+            }
+            stateMap.pageNum = stateMap.pageNum - 1;
+            Modal.getSongs(name, stateMap.pageNum, {
+                success: showSongs,
+                error: function (textStatus) {
+                    console.log(textStatus);
+                }
+            });
+        }
+        else if (event.target['id'] === "next-page") {
+            // 其实是没有办法判断是否到达了最后一页,因为返回的数据,有时候标示的最大页码会变
+            stateMap.pageNum = stateMap.pageNum + 1;
+            Modal.getSongs(name, stateMap.pageNum, {
+                success: showSongs,
+                error: function (textStatus) {
+                    console.log(textStatus);
+                }
+            });
+        }
+        return false;
     }
     function initModule() {
         jqueryMap.$searchBar.on('keyup', responseKeyboard);
@@ -202,10 +239,13 @@ var Shell;
         jqueryMap.$playlist.on('click', function (event) {
             MusicPlayer.setState({
                 curSong: parseInt(event.target.parentElement.dataset['order']),
-                playingState: configMap.playingState.init
+                playingState: configMap.playingState.init,
+                isCross: false
             });
             MusicPlayer.playSong();
         });
+        jqueryMap.$prevPage.on('click', handlePageEvent);
+        jqueryMap.$nextPage.on('click', handlePageEvent);
     }
     Shell.initModule = initModule;
 })(Shell || (Shell = {}));

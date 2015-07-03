@@ -52,6 +52,8 @@
             <div id="wrapper">
                 <div id="search-bar">
                     <input type="text" placeholder="请搜索..." maxlength="20">
+                    <button id="prev-page">上一页</button>
+                    <button id="next-page">下一页</button>
                     <ul id="suggestion-box">
                     </ul>
                 </div>
@@ -72,31 +74,6 @@
         Modal.initModule();
         Data.initModule();
         Shell.initModule();
-        var result;
-        function handle(data) {
-            result = data;
-            return data;
-        }
-        function test(q,page,size, callback) {
-            $.ajax({
-                url:'http://so.ard.iyyin.com/s/song_with_out?',
-                method: 'GET',
-                dataType: 'jsonp',
-                timeout: 5000,
-                data: {
-                    q: q,
-                    page: page,
-                    size: size
-                },
-                success: function(data, textStatus, jqXHR) {
-                    console.log('Done');
-                    callback(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log('error');
-                }
-            });
-        }
     </script>
 </body>
 </html>

@@ -46,7 +46,8 @@ module MusicPlayer {
         curState: configMap.playingState.init,
         playlist: _playlist,
         timeId: null,
-        quality: configMap.musicQuality.standard
+        quality: configMap.musicQuality.standard,
+        isCross: false
     };
     var audio = <HTMLAudioElement>jqueryMap.$audio.get(0);
 
@@ -146,7 +147,7 @@ module MusicPlayer {
     }
 
     function nextSong():boolean {
-        stateMap.curSong= stateMap.curSong + 1;
+        stateMap.curSong = stateMap.curSong + 1;
         if (stateMap.curSong > stateMap.playlist.length - 1) {
             stateMap.curSong = stateMap.curSong - 1;
             alert('已经是最后一首歌了');
@@ -165,9 +166,10 @@ module MusicPlayer {
         stateMap.playlist = Modal.getPlaylist();
         return true;
     }
-    export function setState(obj:{curSong:number;playingState:number}) {
+    export function setState(obj:{curSong:number;playingState:number;isCross:boolean}) {
         stateMap.curSong = obj.curSong;
         stateMap.curState = obj.playingState;
+        stateMap.isCross = obj.isCross;
     }
 
     export function initModule() {
@@ -194,7 +196,11 @@ module MusicPlayer {
             return false;
         });
         jqueryMap.$audio.on('ended', function (event) {
-            nextSong();
+            if (stateMap.isCross) {
+                playSong();
+            } else {
+                nextSong();
+            }
             return false;
         });
         jqueryMap.$volumeBarOuter.on('click', volumeBarClickHandler);

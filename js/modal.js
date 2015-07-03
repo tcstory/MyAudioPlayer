@@ -23,7 +23,7 @@ var Modal;
         };
         var url = 'http://so.ard.iyyin.com/s/song_with_out?';
         Data.send(url, 3000, data, callbacks);
-        return page;
+        return true;
     }
     Modal.getSongs = getSongs;
     function storePlaylist(item) {
