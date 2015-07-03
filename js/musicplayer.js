@@ -1,7 +1,9 @@
 /// <reference path="../typings/jquery/jquery.d.ts" />
+/// <reference path="modal.ts" />
 var MusicPlayer;
 (function (MusicPlayer) {
     "use strict";
+    var _playlist = [];
     var jqueryMap = {
         $playBtn: $('#play-btn'),
         $prevBtn: $('#prev-btn'),
@@ -22,13 +24,19 @@ var MusicPlayer;
             init: 0,
             playing: 1,
             pause: 2
+        },
+        musicQuality: {
+            compress: 0,
+            standard: 1,
+            high: 2
         }
     };
     var stateMap = {
         curSong: 0,
         curState: configMap.playingState.init,
-        playlist: [],
+        playlist: _playlist,
         timeId: null,
+        quality: configMap.musicQuality.standard
     };
     var audio = jqueryMap.$audio.get(0);
     function timeupdateHandler() {
@@ -75,7 +83,7 @@ var MusicPlayer;
     function playSong() {
         switch (stateMap.curState) {
             case configMap.playingState.init:
-                var songPath = stateMap.playlist[stateMap.curSong];
+                var songPath = stateMap.playlist[stateMap.curSong]['url_list'][stateMap.quality]['url'];
                 jqueryMap.$audio.attr({
                     src: songPath
                 });
@@ -100,6 +108,7 @@ var MusicPlayer;
                 return true;
         }
     }
+    MusicPlayer.playSong = playSong;
     function pauseSong() {
         stateMap.curState = configMap.playingState.pause;
         audio.pause();
@@ -112,7 +121,7 @@ var MusicPlayer;
             alert('已经是第一首歌了');
             return false;
         }
-        var songPath = stateMap.playlist[stateMap.curSong];
+        var songPath = stateMap.playlist[stateMap.curSong]['url_list'][stateMap.quality]['url'];
         jqueryMap.$audio.attr({
             src: songPath
         });
@@ -127,7 +136,7 @@ var MusicPlayer;
             alert('已经是最后一首歌了');
             return false;
         }
-        var songPath = stateMap.playlist[stateMap.curSong];
+        var songPath = stateMap.playlist[stateMap.curSong]['url_list'][stateMap.quality]['url'];
         jqueryMap.$audio.attr({
             src: songPath
         });
@@ -135,15 +144,18 @@ var MusicPlayer;
         audio.play();
         return true;
     }
-    function getPlaylist() {
-        stateMap.playlist.push('./assets/music/不要忘记我爱你.mp3');
-        stateMap.playlist.push('./assets/music/泡沫.mp3');
-        stateMap.playlist.push('./assets/music/多远都要在一起.mp3');
+    function updatePlaylist() {
+        stateMap.playlist = Modal.getPlaylist();
         return true;
     }
+    MusicPlayer.updatePlaylist = updatePlaylist;
+    function setState(obj) {
+        stateMap.curSong = obj.curSong;
+        stateMap.curState = obj.playingState;
+    }
+    MusicPlayer.setState = setState;
     function initModule() {
         // --- Initializing User Interface
-        getPlaylist();
         jqueryMap.$volumeBarInner.css('width', function (index, oldValue) {
             var curVolume = audio.volume;
             var percentage = curVolume / 1;

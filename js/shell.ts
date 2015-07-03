@@ -24,7 +24,13 @@ module Shell {
                 '<div class="song-long">popularity</div>' +
                 '<div class="song-size">人气</div>' +
                 '<div class="singer-name">singerName</div>' +
-            '</div>'
+            '</div>',
+        playingState: {
+            init: 0,
+            playing: 1,
+            pause: 2
+        }
+
     };
 
     var sendSuggestionRequest = function () {
@@ -120,7 +126,6 @@ module Shell {
 
     function showSuggestion(data) {
         refreshSuggestionWindow();
-        console.log(data);
         var result = data.data;
         if (result.length === 0) {
             // 搜索的歌曲(歌手)不存在时,返回的数组为空
@@ -141,11 +146,26 @@ module Shell {
     function showSongs(result) {
         var data = result.data;
         var $fragment = $(document.createDocumentFragment());
+        Modal.emptyPlaylist(true);
         data.forEach(function (item, index, array) {
             var songName = item['song_name'];
+            var songID = item['song_id'];
             var popularity = item['pick_count'] || "未知";
             var singerName = item['singer_name'];
-            var str = configMap.template.replace(/songName|popularity|singerName/g, function (match, pos, originalText) {
+            var singerID = item['singer_id'];
+            var urlList = item['url_list'];
+            var orderNum = index;
+
+            // 把歌曲数据缓存到Modal中
+            Modal.storePlaylist({
+                singer_id: singerID,
+                singer_name: singerName,
+                song_id: songID,
+                song_name: songName,
+                url_list: urlList,
+                order_num: orderNum
+            });
+            var str = configMap.template.replace(/num|songName|popularity|singerName/g, function (match, pos, originalText) {
                 switch (match) {
                     case 'songName':
                         return songName;
@@ -153,15 +173,19 @@ module Shell {
                         return popularity;
                     case 'singerName':
                         return singerName;
+                    case 'num':
+                        return orderNum + 1;
                 }
             });
-            console.log(str);
-            var part = $(str);
-            $fragment.append(part);
+            var $part = $(str);
+            $part.attr('data-order', orderNum);
+            $fragment.append($part);
 
         });
+        MusicPlayer.updatePlaylist();
         if (stateMap.pageID === 1) {
-            jqueryMap.$playlist.html($fragment);
+            jqueryMap.$playlist.html('');
+            jqueryMap.$playlist.append($fragment);
         } else {
             jqueryMap.$playlist.append($fragment);
         }
@@ -179,8 +203,15 @@ module Shell {
     export function initModule() {
         jqueryMap.$searchBar.on('keyup', responseKeyboard);
         $('body').on('click', function (event) {
-            jqueryMap.$suggestionBox.html('');
+            refreshSuggestionWindow();
             return false;
+        });
+        jqueryMap.$playlist.on('click', function (event) {
+            MusicPlayer.setState({
+                curSong: parseInt(event.target.parentElement.dataset['order']),
+                playingState: configMap.playingState.init
+            });
+            MusicPlayer.playSong();
         });
     }
 }

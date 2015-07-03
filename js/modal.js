@@ -1,6 +1,10 @@
 /// <reference path="data.ts" />
 var Modal;
 (function (Modal) {
+    var _playlist = [];
+    var stateMap = {
+        playlist: _playlist
+    };
     function getSuggestions(name, callbacks) {
         var data = {
             q: name,
@@ -22,6 +26,20 @@ var Modal;
         return page;
     }
     Modal.getSongs = getSongs;
+    function storePlaylist(item) {
+        stateMap.playlist.push(item);
+    }
+    Modal.storePlaylist = storePlaylist;
+    function getPlaylist() {
+        return stateMap.playlist;
+    }
+    Modal.getPlaylist = getPlaylist;
+    function emptyPlaylist(flag) {
+        if (flag) {
+            stateMap.playlist = [];
+        }
+    }
+    Modal.emptyPlaylist = emptyPlaylist;
     function initModule() {
         return true;
     }
