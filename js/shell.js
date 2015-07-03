@@ -192,6 +192,7 @@ var Shell;
             playingState: configMap.playingState.init,
             isCross: true
         });
+        adjustScrollPosition();
     }
     function refreshSuggestionWindow() {
         // 刷新状态
@@ -199,6 +200,11 @@ var Shell;
         stateMap.$currentItem = null;
         stateMap.$candidates = null;
         return true;
+    }
+    function adjustScrollPosition() {
+        if (jqueryMap.$playlist.prop('scrollTop') != 0) {
+            jqueryMap.$playlist.prop('scrollTop', 0);
+        }
     }
     function handlePageEvent(event) {
         if (!stateMap.isDisplay) {

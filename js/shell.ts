@@ -198,6 +198,7 @@ module Shell {
             playingState: configMap.playingState.init,
             isCross: true
         });
+        adjustScrollPosition();
     }
 
     function refreshSuggestionWindow() {
@@ -206,6 +207,12 @@ module Shell {
         stateMap.$currentItem = null;
         stateMap.$candidates = null;
         return true;
+    }
+
+    function adjustScrollPosition() {
+        if (jqueryMap.$playlist.prop('scrollTop') != 0) {
+            jqueryMap.$playlist.prop('scrollTop', 0);
+        }
     }
 
     function handlePageEvent(event:JQueryMouseEventObject):boolean {

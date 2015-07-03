@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3f6da05-dade-4816-a4c8-b078ec012f2e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/index.css" afterPath="$PROJECT_DIR$/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/modal.js" afterPath="$PROJECT_DIR$/js/modal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/modal.ts" afterPath="$PROJECT_DIR$/js/modal.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/musicplayer.js.map" afterPath="$PROJECT_DIR$/js/musicplayer.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/musicplayer.js" afterPath="$PROJECT_DIR$/js/musicplayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/musicplayer.ts" afterPath="$PROJECT_DIR$/js/musicplayer.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/shell.js.map" afterPath="$PROJECT_DIR$/js/shell.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/shell.js" afterPath="$PROJECT_DIR$/js/shell.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/shell.ts" afterPath="$PROJECT_DIR$/js/shell.ts" />
@@ -33,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.023972603">
-              <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+            <state vertical-scroll-proportion="-8.142858">
+              <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
               <folding>
                 <element signature="n#script#1;n#head#0;n#html#0;n#!!top" expanded="false" />
               </folding>
@@ -65,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shell.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="shell.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/shell.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.1748366">
+              <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -791,16 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/shell.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/musicplayer.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -813,10 +796,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.023972603">
-          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
           <folding>
             <element signature="n#script#1;n#head#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/shell.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1748366">
+          <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
