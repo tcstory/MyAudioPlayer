@@ -7,6 +7,7 @@ Webstrom 10
 
 #### 提示:
 只在新版的Chrome浏览器和Firefox浏览器对下测试过
+本程序使用TypeScript开发
 
 #### 演示地址
 http://tcstory.github.io/myaudioplayerdemo/
